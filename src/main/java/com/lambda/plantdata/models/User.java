@@ -77,7 +77,7 @@ public class User
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
-    private Set<Plant> plants = new HashSet<>();
+    private Set<UserPlants> plants = new HashSet<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -106,7 +106,7 @@ public class User
     }
 
 
-    public User(String username, String password, @Email String primaryemail, String firstname, String lastname, String phone, Set<UserRoles> roles, Set<Plant> plants) {
+    public User(String username, String password, @Email String primaryemail, String firstname, String lastname, String phone, Set<UserRoles> roles, Set<UserPlants> plants) {
         this.username = username;
         this.password = password;
         this.primaryemail = primaryemail;
@@ -115,6 +115,26 @@ public class User
         this.phone = phone;
         this.roles = roles;
         this.plants = plants;
+    }
+
+//    public User(String username, String password, @Email String primaryemail, String firstname, String lastname, String phone, Set<UserRoles> roles, Set<Plant> plants) {
+//        this.username = username;
+//        this.password = password;
+//        this.primaryemail = primaryemail;
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.phone = phone;
+//        this.roles = roles;
+//        this.plants = plants;
+//    }
+
+    public User(String username, String password, String primaryemail, String firstname, String lastname, String phone) {
+        this.username = username;
+        this.password = password;
+        this.primaryemail = primaryemail;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
     }
 
     public String getFirstname() {
@@ -244,11 +264,19 @@ public class User
         this.roles = roles;
     }
 
-    public Set<Plant> getPlants() {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Set<UserPlants> getPlants() {
         return plants;
     }
 
-    public void setPlants(Set<Plant> plants) {
+    public void setPlants(Set<UserPlants> plants) {
         this.plants = plants;
     }
 
