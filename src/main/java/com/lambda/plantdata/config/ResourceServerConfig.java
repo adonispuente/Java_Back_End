@@ -58,7 +58,6 @@ public class ResourceServerConfig
                              "/logout")
                 .authenticated()
                 .antMatchers("/roles/**").hasAnyRole("ADMIN", "DATA")
-                .antMatchers("/books/**").hasAnyRole("ADMIN", "DATA")
 
                 .and()
                 .exceptionHandling()

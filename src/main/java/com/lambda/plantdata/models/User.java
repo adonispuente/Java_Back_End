@@ -38,7 +38,7 @@ public class User
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -54,6 +54,10 @@ public class User
 
 
     private String lastname;
+
+    @Column(nullable = false,
+            unique = true)
+    private String phone;
 
     /**
      * A list of emails for this user
@@ -102,13 +106,15 @@ public class User
     }
 
 
-    public User(String username, String password, @Email String primaryemail, String firstname, String lastname, Set<UserRoles> roles) {
+    public User(String username, String password, @Email String primaryemail, String firstname, String lastname, String phone, Set<UserRoles> roles, Set<Plant> plants) {
         this.username = username;
         this.password = password;
         this.primaryemail = primaryemail;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.phone = phone;
         this.roles = roles;
+        this.plants = plants;
     }
 
     public String getFirstname() {
