@@ -14,6 +14,8 @@ public interface PlantService {
 
     Plant update(Plant plant);
 
+    public void deleteAll();
+
 
 
 

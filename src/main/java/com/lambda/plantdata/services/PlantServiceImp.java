@@ -35,4 +35,9 @@ public class PlantServiceImp implements PlantService{
     public Plant update(Plant plant) {
         return null;
     }
+
+    @Override
+    public void deleteAll() {
+        plantRepository.deleteAll();
+    }
 }
