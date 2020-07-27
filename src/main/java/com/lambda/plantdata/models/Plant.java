@@ -4,24 +4,31 @@ package com.lambda.plantdata.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "plants")
-public class Plant {
+public class Plant extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long plantid;
 
-
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String water_frequency;
+
+    @Column(nullable = false)
     private String species;
+
     private String image;
 
-    @ManyToOne
-    @JoinColumn(name ="userid", nullable = false)
+    @OneToMany
+    @JoinColumn(name ="plants", nullable = false)
     @JsonIgnoreProperties(value = "plants", allowSetters = true)
-    private User user;
+    private Set<UserPlants> users = new HashSet<>();
 
     public Plant() {
     }
@@ -73,12 +80,12 @@ public class Plant {
         this.image = image;
     }
 
-    public User getUser() {
-        return user;
+    public Set<UserPlants> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Set<UserPlants> users) {
+        this.users = users;
     }
 
     @Override

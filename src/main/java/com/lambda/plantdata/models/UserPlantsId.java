@@ -12,9 +12,9 @@ public class UserPlantsId implements Serializable
     private long user;
 
     /**
-     * The id of the role
+     * The id of the plant
      */
-    private long plant;
+    private long plants;
 
     public UserPlantsId() {
     }
@@ -29,11 +29,11 @@ public class UserPlantsId implements Serializable
     }
 
     public long getPlant() {
-        return plant;
+        return plants;
     }
 
     public void setPlant(long plant) {
-        this.plant = plant;
+        this.plants = plant;
     }
 
 
@@ -49,7 +49,7 @@ public class UserPlantsId implements Serializable
         }
         UserPlantsId that = (UserPlantsId) o;
         return user == that.user &&
-                plant == that.plant;
+                plants == that.plants;
     }
 
     @Override

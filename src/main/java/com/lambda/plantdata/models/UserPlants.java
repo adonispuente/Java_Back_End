@@ -21,14 +21,14 @@ public class UserPlants extends Auditable implements Serializable {
     @ManyToOne
     @JoinColumn(name = "plantid")
     @JsonIgnoreProperties(value = "users", allowSetters = true)
-    private Plant plant;
+    private Plant plants;
 
     public UserPlants() {
     }
 
-    public UserPlants(User user, Plant plant) {
+    public UserPlants(User user, Plant plants) {
         this.user = user;
-        this.plant = plant;
+        this.plants = plants;
     }
 
     public User getUser() {
@@ -39,14 +39,13 @@ public class UserPlants extends Auditable implements Serializable {
         this.user = user;
     }
 
-    public Plant getPlant() {
-        return plant;
+    public Plant getPlants() {
+        return plants;
     }
 
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setPlants(Plant plants) {
+        this.plants = plants;
     }
-
 
     @Override
     public int hashCode() {
@@ -65,6 +64,6 @@ public class UserPlants extends Auditable implements Serializable {
         }
         UserPlants that = (UserPlants) o;
         return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
-                ((plant == null) ? 0 : plant.getPlantid()) == ((that.plant == null) ? 0 : that.plant.getPlantid());
+                ((plants == null) ? 0 : plants.getPlantid()) == ((that.plants == null) ? 0 : that.plants.getPlantid());
     }
 }

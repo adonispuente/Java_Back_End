@@ -16,12 +16,12 @@ import javax.validation.constraints.Email;
 public class SeedData implements CommandLineRunner {
 
     @Autowired
-    UserService userService;
+   private UserService userService;
     @Autowired
-    PlantService plantService;
+   private PlantService plantService;
     @Autowired
-    RoleService roleService;
-
+   private RoleService roleService;
+    @Transactional
     @Override
     public void run(String... args) throws Exception {
 
@@ -49,29 +49,34 @@ public class SeedData implements CommandLineRunner {
 //        public User(String username, String password, @Email String primaryemail, String firstname, String lastname,
 //        String phone, Set< UserRoles > roles, Set< Plant > plants) {
 
-        User u1 = new User("AdonisP", "Password", "adonis@adonis.com", "Adonis", "Puente","7861231234" );
+
+//        created_by, created_date, last_modified_by, last_modified_date, firstname, lastname, password, phone, primaryemail, username, userid)
+        User u1 = new User("AP", "PASSWORD", "ADONIS@ADONS.COM", "ADONIS", "PUENTE","7861231234" );
         u1.getRoles().add(new UserRoles(u1,r1));
         u1.getPlants().add(new UserPlants(u1,p1));
         userService.save(u1);
 
-        User u2 = new User("PABLOP", "Password", "pablo@adonis.com", "pablo", "bobop","123456789" );
-        u2.getRoles().add(new UserRoles(u2,r2));
-        u2.getPlants().add(new UserPlants(u2,p2));
-        userService.save(u2);
+//        User u2 = new User("PABLOP", "Password", "pablo@adonis.com", "pablo", "bobop","123456789" );
+//        u2.getRoles().add(new UserRoles(u2,r2));
+//        u2.getPlants().add(new UserPlants(u2,p2));
+//        userService.save(u2);
+//
+//
+//        User u3 = new User("MEGAMAN", "Password", "MEGAMAN@adonis.com", "MEGA", "MAN","9999999999" );
+//        u3.getRoles().add(new UserRoles(u3,r2));
+//        u3.getPlants().add(new UserPlants(u3,p3));
+//        userService.save(u3);
+//
+//
+//        User u4 = new User("PROTOMAN", "Password", "PROTO@adonis.com", "PROTO", "MAN","123456789" );
+//        u4.getRoles().add(new UserRoles(u4,r2));
+//        u4.getPlants().add(new UserPlants(u4,p4));
+//        userService.save(u4);
 
+        for(UserPlants up: u1.getPlants()){
+            System.out.println(up.getPlants() + " LOOOK HERE RIGHT *******************************!!!!!!!!!!!!!!");
 
-        User u3 = new User("MEGAMAN", "Password", "MEGAMAN@adonis.com", "MEGA", "MAN","9999999999" );
-        u3.getRoles().add(new UserRoles(u3,r2));
-        u3.getPlants().add(new UserPlants(u3,p3));
-        userService.save(u3);
-
-
-        User u4 = new User("PROTOMAN", "Password", "PROTO@adonis.com", "PROTO", "MAN","123456789" );
-        u4.getRoles().add(new UserRoles(u4,r2));
-        u4.getPlants().add(new UserPlants(u4,p4));
-        userService.save(u4);
-
-
+        }
 
 
     }

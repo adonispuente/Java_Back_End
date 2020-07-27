@@ -1,6 +1,7 @@
 package com.lambda.plantdata.services;
 
 
+import com.lambda.plantdata.exceptions.ResourceNotFoundException;
 import com.lambda.plantdata.models.Plant;
 import com.lambda.plantdata.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,11 @@ public class PlantServiceImp implements PlantService{
 
     @Override
     public Plant save(Plant plant) {
-        return null;
+        if (plant.getUsers().size()>0)
+        {
+            throw new ResourceNotFoundException("UserPlants are not updated through Plants");
+        }
+        return plantRepository.save(plant);
     }
 
     @Override

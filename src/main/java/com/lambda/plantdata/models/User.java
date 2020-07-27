@@ -18,8 +18,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "users")
-public class User
-        extends Auditable
+public class User extends Auditable
 {
     /**
      * The primary key (long) of the users table.
@@ -67,8 +66,7 @@ public class User
      * Part of the join relationship between user and role
      * connects users to the user role combination
      */
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
@@ -95,15 +93,13 @@ public class User
      * @param password     The password (String) of the user
      * @param primaryemail The primary email (String) of the user
      */
-    public User(
-            String username,
-            String password,
-            String primaryemail)
+    public User(String username, String password, String primaryemail)
     {
         setUsername(username);
         setPassword(password);
         this.primaryemail = primaryemail;
     }
+
 
 
     public User(String username, String password, @Email String primaryemail, String firstname, String lastname, String phone, Set<UserRoles> roles, Set<UserPlants> plants) {
@@ -117,16 +113,7 @@ public class User
         this.plants = plants;
     }
 
-//    public User(String username, String password, @Email String primaryemail, String firstname, String lastname, String phone, Set<UserRoles> roles, Set<Plant> plants) {
-//        this.username = username;
-//        this.password = password;
-//        this.primaryemail = primaryemail;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.phone = phone;
-//        this.roles = roles;
-//        this.plants = plants;
-//    }
+//         firstname, lastname, password, phone, primaryemail, username, userid)
 
     public User(String username, String password, String primaryemail, String firstname, String lastname, String phone) {
         this.username = username;

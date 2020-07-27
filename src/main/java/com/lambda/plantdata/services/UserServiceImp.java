@@ -1,7 +1,8 @@
 package com.lambda.plantdata.services;
 
 import com.lambda.plantdata.exceptions.ResourceNotFoundException;
-import com.lambda.plantdata.models.User;
+import com.lambda.plantdata.models.*;
+import com.lambda.plantdata.repository.RoleRepository;
 import com.lambda.plantdata.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ public class UserServiceImp implements UserService{
     @Autowired
     private UserRepository userRepository;
 
-
+    @Autowired
+    private RoleService roleService;
 
 
     @Override
@@ -63,7 +65,41 @@ public class UserServiceImp implements UserService{
 
     @Override
     public User save(User user) {
-        return null;
+        User newUser = new User();
+
+        if (user.getUserid() != 0)
+        {
+            userRepository.findById(user.getUserid())
+                    .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
+            newUser.setUserid(user.getUserid());
+        }
+
+        newUser.setUsername(user.getUsername().toLowerCase());
+        newUser.setPasswordNoEncrypt(user.getPassword());
+        newUser.setPrimaryemail(user.getPrimaryemail().toLowerCase());
+        newUser.setFirstname(user.getFirstname().toLowerCase());
+        newUser.setLastname(user.getLastname().toLowerCase());
+        newUser.setPhone(user.getPhone());
+
+
+        newUser.getRoles()
+                .clear();
+        for (UserRoles ur : user.getRoles())
+        {
+            Role addRole = roleService.findRoleById(ur.getRole()
+                    .getRoleid());
+            newUser.getRoles()
+                    .add(new UserRoles(newUser, addRole));
+        }
+
+        newUser.getPlants().clear();
+        for(UserPlants up: user.getPlants())
+        {
+            newUser.getPlants().add(new UserPlants(newUser,up.getPlants()));
+        }
+
+
+        return userRepository.save(newUser);
     }
 
     @Override
