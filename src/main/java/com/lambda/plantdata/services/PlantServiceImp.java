@@ -36,6 +36,7 @@ public class PlantServiceImp implements PlantService{
     @Transactional
     @Override
     public Plant update(Plant plant,long id) {
+
     Plant currentPlant = findPlantById(id);
 
     if(plant.getImage()!=null)
