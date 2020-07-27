@@ -74,7 +74,7 @@ public class UserServiceImp implements UserService{
             newUser.setUserid(user.getUserid());
         }
 
-        newUser.setUsername(user.getUsername().toLowerCase());
+        newUser.setUsername(user.getUsername());
         newUser.setPasswordNoEncrypt(user.getPassword());
         newUser.setPrimaryemail(user.getPrimaryemail().toLowerCase());
         newUser.setFirstname(user.getFirstname().toLowerCase());

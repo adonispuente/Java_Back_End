@@ -105,7 +105,7 @@
     </dependencies>
 
     <build>
-        <finalName>WaterMyPlantsDataBase</finalName>
+        <finalName>watermyplantsdatabase</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
