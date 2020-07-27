@@ -37,15 +37,14 @@ public class User extends Auditable
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     /**
      * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
      */
-    @Column(nullable = false,
-            unique = true)
+    @Column(nullable = false)
     @Email
     private String primaryemail;
 

@@ -25,8 +25,8 @@ public class Plant extends Auditable{
 
     private String image;
 
-    @OneToMany
-    @JoinColumn(name ="plants", nullable = false)
+    @OneToMany(mappedBy = "plants",cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name ="plants", nullable = false)
     @JsonIgnoreProperties(value = "plants", allowSetters = true)
     private Set<UserPlants> users = new HashSet<>();
 

@@ -52,12 +52,13 @@ public class ResourceServerConfig
                              "/webjars/**",
                              "/createnewuser")
                 .permitAll()
+                //remove /users to take of security in the mean time
                 .antMatchers("/users/**",
                              "/useremails/**",
                              "/oauth/revoke-token",
                              "/logout")
                 .authenticated()
-                .antMatchers("/roles/**").hasAnyRole("ADMIN", "DATA")
+//                .antMatchers("/user/**").hasAnyRole("ADMIN", "DATA","USERS")
 
                 .and()
                 .exceptionHandling()
