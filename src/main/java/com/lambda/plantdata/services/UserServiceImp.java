@@ -101,10 +101,50 @@ public class UserServiceImp implements UserService{
 
         return userRepository.save(newUser);
     }
-
+    @Transactional
     @Override
     public User update(User user, long id) {
-        return null;
+
+        User currentUser = findUserById(id);
+
+        if (user.getUsername() != null)
+        {
+            currentUser.setUsername(user.getUsername());
+        }
+
+        if (user.getPassword() != null)
+        {
+            currentUser.setPasswordNoEncrypt(user.getPassword());
+        }
+
+        if (user.getPrimaryemail() != null)
+        {
+            currentUser.setPrimaryemail(user.getPrimaryemail()
+                    .toLowerCase());
+        }
+        if (user.getFirstname() != null)
+        {
+            currentUser.setFirstname(user.getFirstname());
+        }
+        if (user.getLastname() != null)
+        {
+            currentUser.setLastname(user.getLastname());
+        }
+        if (user.getPhone() != null)
+        {
+            currentUser.setPhone(user.getPhone());
+        }
+
+        if (user.getPlants().size() > 0)
+        {
+            currentUser.getPlants().clear();
+            for (UserPlants ue : user.getPlants())
+            {
+                currentUser.getPlants().add(new UserPlants(currentUser, ue.getPlants()));
+            }
+        }
+
+        return userRepository.save(currentUser);
     }
 
     @Override

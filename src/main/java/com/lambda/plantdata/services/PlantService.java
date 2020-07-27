@@ -12,13 +12,13 @@ public interface PlantService {
 
     Plant save(Plant plant);
 
-    Plant update(Plant plant);
+    Plant update(Plant plant, long id);
 
     public void deleteAll();
 
     public void deleteById(long id);
 
 
-
+    public Plant findPlantById(long id);
 
 }
