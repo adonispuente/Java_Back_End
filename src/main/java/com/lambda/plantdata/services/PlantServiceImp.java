@@ -29,10 +29,7 @@ public class PlantServiceImp implements PlantService{
 
     @Override
     public Plant save(Plant plant) {
-        if (plant.getUsers().size()>0)
-        {
-            throw new ResourceNotFoundException("UserPlants are not updated through Plants");
-        }
+
         return plantRepository.save(plant);
     }
 
@@ -44,5 +41,20 @@ public class PlantServiceImp implements PlantService{
     @Override
     public void deleteAll() {
         plantRepository.deleteAll();
+    }
+
+    @Override
+    public void deleteById(long id) {
+
+        {
+            if (plantRepository.findById(id)
+                    .isPresent())
+            {
+                plantRepository.deleteById(id);
+            } else
+            {
+                throw new ResourceNotFoundException("Plant with id " + id + " Not Found!");
+            }
+        }
     }
 }

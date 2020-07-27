@@ -16,6 +16,8 @@ public interface PlantService {
 
     public void deleteAll();
 
+    public void deleteById(long id);
+
 
 
 

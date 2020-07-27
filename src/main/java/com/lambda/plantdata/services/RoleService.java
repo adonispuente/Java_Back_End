@@ -51,6 +51,7 @@ public interface RoleService
      */
     public void deleteAll();
 
+
     /**
      * Updates the name of the given role
      *
