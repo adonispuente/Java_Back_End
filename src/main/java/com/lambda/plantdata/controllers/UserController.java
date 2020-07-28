@@ -33,27 +33,28 @@ public class UserController {
     }
 
     //ADDING NEW USER
-    @PostMapping(value = "/user", consumes = {"application/json"})
-    public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
-    {
-        newuser.setUserid(0);
-        Role r2 = new Role("USER");
-        newuser.getRoles().add( new UserRoles(newuser,r2));
-
-        newuser = userService.save(newuser);
-
-        // set the location header for the newly created resource
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{userid}")
-                .buildAndExpand(newuser.getUserid())
-                .toUri();
-        responseHeaders.setLocation(newUserURI);
-
-        return new ResponseEntity<>(null,
-                responseHeaders,
-                HttpStatus.CREATED);
-    }
+//    @PostMapping(value = "/user", consumes = {"application/json"})
+//    public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
+//    {
+//        newuser.setUserid(0);
+//        Role r2 = new Role("USER");
+//        newuser.getRoles().add( new UserRoles(newuser,r2));
+//
+//        newuser = userService.save(newuser);
+//
+//        // set the location header for the newly created resource
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{userid}")
+//                .buildAndExpand(newuser.getUserid())
+//                .toUri();
+//        responseHeaders.setLocation(newUserURI);
+//
+//        return new ResponseEntity<>(null,
+//                responseHeaders,
+//                HttpStatus.CREATED);
+//    }
+//
     //DELETE ACCOUNT
     @DeleteMapping(value = "/user/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable long id)
@@ -114,7 +115,7 @@ public class UserController {
     }
 
     //UPDATE USER PLANT
-    @PutMapping(value = "/user/plants/",consumes = "application/json")
+    @PutMapping(value = "/user/plants",consumes = "application/json")
     public ResponseEntity<?> updateUserPlants(Authentication authentication,@RequestBody Plant newplant)
     {
         User u = userService.findByName(authentication.getName());

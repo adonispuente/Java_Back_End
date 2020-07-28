@@ -50,7 +50,7 @@ public class ResourceServerConfig
                              "/swagger-ui.html",
                              "/v2/api-docs",
                              "/webjars/**",
-                             "/createnewuser","/user/**")
+                             "/createnewuser")
                 .permitAll()
                 //remove /users to take of security in the mean time
                 .antMatchers("/users/**",
@@ -59,6 +59,7 @@ public class ResourceServerConfig
                              "/logout")
                 .authenticated()
                 .antMatchers("/user/**").hasAnyRole("ADMIN","USERS")
+                .antMatchers("/users/**").hasAnyRole("ADMIN")
 
                 .and()
                 .exceptionHandling()

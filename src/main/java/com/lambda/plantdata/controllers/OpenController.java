@@ -52,7 +52,7 @@ public class OpenController
             consumes = {"application/json"},
             produces = {"application/json"})
     public ResponseEntity<?> addSelf(
-            HttpServletRequest httpServletRequest, @Valid @RequestBody User newminuser)
+            HttpServletRequest httpServletRequest, @Valid @RequestBody UserMinimum newminuser)
             throws URISyntaxException
     {
         // Create the user
@@ -66,24 +66,8 @@ public class OpenController
         newuser.setLastname(newminuser.getLastname());
 
         Role normal = roleService.findByName("user");
-
         newuser.getRoles().add(new UserRoles(newuser,normal));
 
-//        Role normal = new Role("USER");
-////         add the default role of user
-////        u1.getRoles().add(new UserRoles(u1,r1));
-//        Set<UserRoles> newRoles = new HashSet<>();
-//        newRoles.add(new UserRoles(newuser, normal));
-//        newuser.setRoles( newRoles);
-//
-//        newuser.getRoles().add(new UserRoles(newuser,normal));
-//        newuser.getRoles().clear();
-//        for (UserRoles ur : newuser.getRoles())
-//        {
-//            Role addRole = roleService.findRoleById(ur.getRole().getRoleid());
-//            newuser.getRoles().add(new UserRoles(newuser, addRole));
-//
-//        }
         newuser = userService.save(newuser);
 
         // set the location header for the newly created resource
@@ -140,9 +124,7 @@ public class OpenController
                 request,
                 String.class);
 
-        return new ResponseEntity<>(theToken,
-                responseHeaders,
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(theToken,responseHeaders, HttpStatus.CREATED);
     }
 
     /**
