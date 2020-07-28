@@ -82,14 +82,14 @@ public class UserServiceImp implements UserService{
         newUser.setPhone(user.getPhone());
 
 
-//        newUser.getRoles().clear();
-//        for (UserRoles ur : user.getRoles())
-//        {
-//            Role addRole = roleService.findRoleById(ur.getRole()
-//                    .getRoleid());
-//            newUser.getRoles()
-//                    .add(new UserRoles(newUser, addRole));
-//        }
+        newUser.getRoles().clear();
+        for (UserRoles ur : user.getRoles())
+        {
+            Role addRole = roleService.findRoleById(ur.getRole()
+                    .getRoleid());
+            newUser.getRoles()
+                    .add(new UserRoles(newUser, addRole));
+        }
 
         newUser.getPlants().clear();
         for(UserPlants up: user.getPlants())

@@ -1,10 +1,7 @@
 package com.lambda.plantdata.controllers;
 
 
-import com.lambda.plantdata.models.Role;
-import com.lambda.plantdata.models.User;
-import com.lambda.plantdata.models.UserMinimum;
-import com.lambda.plantdata.models.UserRoles;
+import com.lambda.plantdata.models.*;
 import com.lambda.plantdata.services.RoleService;
 import com.lambda.plantdata.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,12 +65,25 @@ public class OpenController
         newuser.setFirstname(newminuser.getFirstname());
         newuser.setLastname(newminuser.getLastname());
 
-        Role normal = new Role("USER");
-        // add the default role of user
-        Set<UserRoles> newRoles = new HashSet<>();
-        newRoles.add(new UserRoles(newuser, normal));
-        newuser.setRoles( newRoles);
+        Role normal = roleService.findByName("user");
 
+        newuser.getRoles().add(new UserRoles(newuser,normal));
+
+//        Role normal = new Role("USER");
+////         add the default role of user
+////        u1.getRoles().add(new UserRoles(u1,r1));
+//        Set<UserRoles> newRoles = new HashSet<>();
+//        newRoles.add(new UserRoles(newuser, normal));
+//        newuser.setRoles( newRoles);
+//
+//        newuser.getRoles().add(new UserRoles(newuser,normal));
+//        newuser.getRoles().clear();
+//        for (UserRoles ur : newuser.getRoles())
+//        {
+//            Role addRole = roleService.findRoleById(ur.getRole().getRoleid());
+//            newuser.getRoles().add(new UserRoles(newuser, addRole));
+//
+//        }
         newuser = userService.save(newuser);
 
         // set the location header for the newly created resource
@@ -120,6 +130,7 @@ public class OpenController
                 newminuser.getFirstname());
         map.add("Lastname",
                 newminuser.getLastname());
+
 
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
