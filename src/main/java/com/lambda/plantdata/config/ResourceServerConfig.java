@@ -56,10 +56,13 @@ public class ResourceServerConfig
                 .antMatchers("/users/**",
                              "/useremails/**",
                              "/oauth/revoke-token",
-                             "/logout")
+                             "/logout","/user/plants")
                 .authenticated()
-                .antMatchers("/user/**").hasAnyRole("ADMIN","USERS")
+//                .antMatchers("/user/**").hasAnyRole("ADMIN","USERS")
+//                .antMatchers("/user/plants").hasAnyRole("ADMIN","USERS")
+
                 .antMatchers("/users/**").hasAnyRole("ADMIN")
+
 
                 .and()
                 .exceptionHandling()
